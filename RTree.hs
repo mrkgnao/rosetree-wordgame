@@ -1,7 +1,7 @@
 module RTreeWordGame where
 
 import Data.Maybe (fromJust)
-import Data.List (lookup, (\\), groupBy, sortBy, foldl1', intercalate)
+import Data.List ((\\), groupBy, sortBy, foldl1', intercalate)
 import Data.Function (on)
 import Data.Ord (comparing)
 
@@ -9,13 +9,9 @@ type Node = String
 type Depth = Int
 
 type IncPair = (Node, [Node])
-data Graph =
-  Graph [IncPair]
-  deriving (Show,Eq)
+data Graph = Graph [IncPair] deriving (Show,Eq)
 
-data RoseTree a =
-  RoseTree a [RoseTree a]
-  deriving (Show,Eq)
+data RoseTree a = RoseTree a [RoseTree a] deriving (Show,Eq)
 
 incidents :: Node -> Graph -> Maybe [Node]
 incidents node (Graph incs) = lookup node incs
@@ -23,7 +19,6 @@ incidents node (Graph incs) = lookup node incs
 nodes :: Graph -> [Node]
 nodes (Graph incs) = map fst incs
 
--- | Print a tree of descendants of a node.
 descTree' :: Node -- the node to look for
           -> Graph -- the graph to look in
           -> [Node] -- ancestors to exclude
@@ -32,12 +27,11 @@ descTree' :: Node -- the node to look for
 descTree' node graph ancs =
   RoseTree node
            (map (\n ->
-                   descTree' n
-                             graph
-                             (node : ancs))
-                 nonAncestorIncidents)
-    where allIncidents = fromJust $ incidents node graph
-          nonAncestorIncidents = allIncidents \\ ancs
+                   descTree' n graph (node : ancs))
+                nonAncestorIncidents)
+  where allIncidents =
+          fromJust $ incidents node graph
+        nonAncestorIncidents = allIncidents \\ ancs
 
 descTree :: Node -> Graph -> RoseTree Node
 descTree node graph = descTree' node graph []
@@ -74,9 +68,11 @@ addedN, removedN, replacedN
   :: String -> String -> Bool
 addedN p q =
   foldl1' (||) $
-  map ((== q) . (\ix -> deleteNth ix p))
+  map (\ix -> deleteNth ix p == q)
       [0 .. length p - 1]
+
 removedN = flip addedN
+
 replacedN p q =
   length (p' \\ q') == 1 && length (q' \\ p') == 1
   where [p',q'] =
@@ -95,19 +91,22 @@ neighbours :: String -> [String] -> [String]
 neighbours str = filter (isNeighbourOf str)
 
 generateGraph :: [String] -> Graph
-generateGraph strs = Graph $ map (\s -> (s, neighbours s strs)) strs
+generateGraph strs =
+  Graph $ map (\s -> (s,neighbours s strs)) strs
 
 removeReverses :: (Eq b) => [(a,[b])] -> [(a,[b])]
-removeReverses = map head . groupBy (\(_,x) (_,y) -> x == y || x == reverse y)
+removeReverses =
+  map head . groupBy (\(_,x) (_,y) -> x == y || x == reverse y)
 
 main :: IO ()
-main = do
-  putStrLn "Enter words, separated by spaces:"
-  wordList' <- getLine
-  let wordList = words wordList'
-      paths' = removeReverses $ longestPaths (generateGraph wordList)
-      pathlen = fst . head $ paths'
-      paths = map snd paths'
-  putStrLn $ "The longest path length is " ++ show pathlen
-  putStrLn "Paths:"
-  mapM_ (putStrLn . intercalate " -> ") paths
+main =
+  do putStrLn "Enter words, separated by spaces:"
+     wordList' <- getLine
+     let wordList = words wordList'
+         paths' =
+           removeReverses $ longestPaths (generateGraph wordList)
+         pathlen = fst . head $ paths'
+         paths = map snd paths'
+     putStrLn $ "The longest path length is " ++ show pathlen
+     putStrLn "Paths:"
+     mapM_ (putStrLn . intercalate " -> ") paths
