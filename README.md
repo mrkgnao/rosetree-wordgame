@@ -15,7 +15,8 @@ looks in Haskell!) of descendants for each vertex, looking at the maximum depth 
 I'm sure this is terribly inefficient and everything (probably `O(V^2)`?)
 
 # A few example runs
-(These are from [the source of the problem](http://www.iarcs.org.in/inoi/2004/zio2004/zio2004-qpaper.pdf)].
+(These are from [the source of the problem](http://www.iarcs.org.in/inoi/2004/zio2004/zio2004-qpaper.pdf)).
+
     λ> main
     Enter words, separated by spaces:
     below blow bow bowl brow crow rot row
