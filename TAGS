@@ -1,24 +1,37 @@
 
-./RTree.hs,625
-type Node Node5,6
-type Depth Depth6,7
-type IncPair IncPair8,9
-data Graph Graph9,10
-  Graph Graph10,11
-data RoseTree RoseTree13,14
-  RoseTree RoseTree14,15
-type WordTree WordTree16,17
-incidents incidents18,19
+./RTree.hs,992
+module RTreeWordGame RTreeWordGame0,1
+type Node Node7,8
+type Depth Depth8,9
+type IncPair IncPair10,11
+data Graph Graph11,12
+  Graph Graph12,13
+data RoseTree RoseTree15,16
+  RoseTree RoseTree16,17
 incidents incidents19,20
-descTree' descTree'22,23
-descTree' descTree'28,29
-descTree descTree39,40
-descTree descTree40,41
-maxDepth maxDepth42,43
-maxDepth maxDepth43,44
-longestSequenceFrom longestSequenceFrom48,49
-longestSequenceFrom longestSequenceFrom49,50
-sampleGraph sampleGraph51,52
-sampleGraph sampleGraph52,53
-loopedGraph loopedGraph62,63
-loopedGraph loopedGraph63,64
+incidents incidents20,21
+nodes nodes22,23
+nodes nodes23,24
+descTree' descTree'26,27
+descTree' descTree'31,32
+descTree descTree41,42
+descTree descTree42,43
+longestPathFrom longestPathFrom44,45
+longestPathFrom longestPathFrom45,46
+longestPaths longestPaths58,59
+longestPaths longestPaths59,60
+isNeighbourOf isNeighbourOf68,69
+isNeighbourOf isNeighbourOf69,70
+addedN addedN74,75
+removedN removedN78,79
+replacedN replacedN79,80
+deleteNth deleteNth85,86
+deleteNth deleteNth86,87
+neighbours neighbours93,94
+neighbours neighbours94,95
+generateGraph generateGraph96,97
+generateGraph generateGraph97,98
+removeReverses removeReverses99,100
+removeReverses removeReverses100,101
+main main102,103
+main main103,104
