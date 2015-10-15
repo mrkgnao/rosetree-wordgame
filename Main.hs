@@ -1,4 +1,4 @@
-module RTreeWordGame where
+module Main where
 
 import Data.Maybe (fromJust)
 import Data.List ((\\), groupBy, sortBy, foldl1', intercalate)
