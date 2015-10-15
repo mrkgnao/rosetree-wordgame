@@ -3,6 +3,8 @@ Suppose I give you a list of words. Call two words *neighbours* if you can get f
 
 What is the longest chain of words you can form by jumping from neighbour to neighbour?
 
+[Here](http://codepad.org/nBcCgA2Q) is a Codepad demo of this program, for those of you who don't have GHC installed.
+
 # Algorithm
 The problem is a fairly straightforward longest-path problem. Since I haven't really worked with graphs in years, no particular algorithm stuck out to me. (I could write BFSes pretty quickly once upon a time.)
 
